@@ -15,7 +15,7 @@ interface CyclesContextType {
 export const CyclesContext = createContext({} as CyclesContextType);
 
 interface IActionCycle {
-  service: "ADD" | "INTERRUPT";
+  service: "ADD" | "INTERRUPT" | "FINISH";
   idCycle: string | null;
   Cycle?: Cycle;
 }
@@ -39,6 +39,16 @@ export function CyclesContextProvider({
               return {
                 ...cycle,
                 interruptedDate: new Date(),
+              };
+            }
+            return cycle;
+          });
+        case "FINISH":
+          return state.map((cycle) => {
+            if (cycle.id === action.idCycle) {
+              return {
+                ...cycle,
+                finishedDate: new Date(),
               };
             }
             return cycle;

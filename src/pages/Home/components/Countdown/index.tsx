@@ -10,7 +10,7 @@ export function Countdown() {
     amountSecondsPassed,
     intervalRef,
     setAmountSecondsPassed,
-    setCycles,
+    dispatch,
     setActiveCycleId,
   } = useContext(CyclesContext);
   const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
@@ -23,17 +23,18 @@ export function Countdown() {
           activeCycle.startDate
         );
         if (secondsDifference >= totalSeconds) {
-          setCycles((state) =>
-            state.map((cycle) => {
-              if (cycle.id === activeCycleId) {
-                return {
-                  ...cycle,
-                  finishedDate: new Date(),
-                };
-              }
-              return cycle;
-            })
-          );
+          // setCycles((state) =>
+          //   state.map((cycle) => {
+          //     if (cycle.id === activeCycleId) {
+          //       return {
+          //         ...cycle,
+          //         finishedDate: new Date(),
+          //       };
+          //     }
+          //     return cycle;
+          //   })
+          // );
+          dispatch({ idCycle: activeCycleId, service: "FINISH" });
           setAmountSecondsPassed(totalSeconds);
           clearInterval(intervalRef.current);
           intervalRef.current = undefined;
@@ -56,7 +57,7 @@ export function Countdown() {
     activeCycleId,
     intervalRef,
     setAmountSecondsPassed,
-    setCycles,
+    dispatch,
   ]);
 
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
