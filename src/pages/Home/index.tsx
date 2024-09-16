@@ -26,7 +26,7 @@ export function Home() {
     setAmountSecondsPassed,
     intervalRef,
     cycles,
-    setCycles,
+    dispatch,
     activeCycleId,
     setActiveCycleId,
   } = useContext(CyclesContext);
@@ -41,7 +41,7 @@ export function Home() {
 
   console.log(cycles);
 
-  const { handleSubmit, watch, reset } = newCycleForm;
+  const { handleSubmit, watch } = newCycleForm;
 
   function handleCreateNewCycle(data: NewCycleFormData) {
     const newCycle: Cycle = {
@@ -51,7 +51,8 @@ export function Home() {
       startDate: new Date(),
     };
 
-    setCycles((prevCycles) => [...prevCycles, newCycle]);
+    //setCycles((prevCycles) => [...prevCycles, newCycle]);
+    dispatch({ service: "ADD", Cycle: newCycle, idCycle: null });
     setActiveCycleId(newCycle.id);
     setAmountSecondsPassed(0);
 
@@ -59,17 +60,18 @@ export function Home() {
   }
 
   function handleInterruptCycle() {
-    setCycles((state) =>
-      state.map((cycle) => {
-        if (cycle.id === activeCycleId) {
-          return {
-            ...cycle,
-            interruptedDate: new Date(),
-          };
-        }
-        return cycle;
-      })
-    );
+    // setCycles((state) =>
+    //   state.map((cycle) => {
+    //     if (cycle.id === activeCycleId) {
+    //       return {
+    //         ...cycle,
+    //         interruptedDate: new Date(),
+    //       };
+    //     }
+    //     return cycle;
+    //   })
+    // );
+    dispatch({ service: "INTERRUPT", idCycle: activeCycleId });
     setActiveCycleId(null);
     if (intervalRef.current !== undefined) {
       clearInterval(intervalRef.current);
