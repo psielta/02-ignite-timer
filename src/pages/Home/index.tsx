@@ -28,7 +28,6 @@ export function Home() {
     cycles,
     dispatch,
     activeCycleId,
-    setActiveCycleId,
   } = useContext(CyclesContext);
 
   const newCycleForm = useForm<NewCycleFormData>({
@@ -51,28 +50,21 @@ export function Home() {
       startDate: new Date(),
     };
 
-    //setCycles((prevCycles) => [...prevCycles, newCycle]);
-    dispatch({ service: "ADD", Cycle: newCycle, idCycle: null });
-    setActiveCycleId(newCycle.id);
+    dispatch({
+      service: "ADD",
+      Cycle: newCycle,
+      idCycle: null,
+      activeCycleId: newCycle.id,
+    });
     setAmountSecondsPassed(0);
-
-    //reset()
   }
 
   function handleInterruptCycle() {
-    // setCycles((state) =>
-    //   state.map((cycle) => {
-    //     if (cycle.id === activeCycleId) {
-    //       return {
-    //         ...cycle,
-    //         interruptedDate: new Date(),
-    //       };
-    //     }
-    //     return cycle;
-    //   })
-    // );
-    dispatch({ service: "INTERRUPT", idCycle: activeCycleId });
-    setActiveCycleId(null);
+    dispatch({
+      service: "INTERRUPT",
+      idCycle: activeCycleId,
+      activeCycleId: null,
+    });
     if (intervalRef.current !== undefined) {
       clearInterval(intervalRef.current);
       intervalRef.current = undefined;
