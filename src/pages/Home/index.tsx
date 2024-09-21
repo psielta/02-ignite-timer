@@ -12,6 +12,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import * as zod from "zod";
 import { useContext } from "react";
 import { CyclesContext } from "../../contexts/CyclesContext";
+import { EnumActionCycles } from "../../reducers/cycles";
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(5, "Tamanho minimo 05 caracteres"),
@@ -51,7 +52,7 @@ export function Home() {
     };
 
     dispatch({
-      service: "ADD",
+      service: EnumActionCycles.ADD_NEW_CYCLE,
       Cycle: newCycle,
       idCycle: null,
       activeCycleId: newCycle.id,
@@ -61,7 +62,7 @@ export function Home() {
 
   function handleInterruptCycle() {
     dispatch({
-      service: "INTERRUPT",
+      service: EnumActionCycles.INTERRUPT_CURRENT_CYCLE,
       idCycle: activeCycleId,
       activeCycleId: null,
     });

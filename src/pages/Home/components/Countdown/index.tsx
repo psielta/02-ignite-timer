@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { CountdownContainer, Separator } from "./style";
 import { differenceInSeconds } from "date-fns";
 import { CyclesContext } from "../../../../contexts/CyclesContext";
+import { EnumActionCycles } from "../../../../reducers/cycles";
 
 export function Countdown() {
   const {
@@ -24,7 +25,7 @@ export function Countdown() {
         if (secondsDifference >= totalSeconds) {
           dispatch({
             idCycle: activeCycleId,
-            service: "FINISH",
+            service: EnumActionCycles.MARK_CURRENT_CYCLE_AS_FINISHED,
             activeCycleId: null,
           });
           setAmountSecondsPassed(totalSeconds);

@@ -19,30 +19,6 @@ export function History() {
             </tr>
           </thead>
           <tbody>
-            {/* <tr>
-              <td>Projeto 1</td>
-              <td>25 minutos</td>
-              <td>12:00</td>
-              <td>
-                <Status statusColor="green">Concluído</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Projeto 2</td>
-              <td>50 minutos</td>
-              <td>13:00</td>
-              <td>
-                <Status statusColor="yellow">Em andamento</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Projeto 3</td>
-              <td>30 minutos</td>
-              <td>14:00</td>
-              <td>
-                <Status statusColor="red">Interrompido</Status>
-              </td>
-            </tr> */}
             {cycles.map((cycle) => {
               return (
                 <tr key={cycle.id}>
