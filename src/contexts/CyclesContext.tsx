@@ -1,6 +1,6 @@
 import { createContext, useEffect, useReducer, useRef, useState } from "react";
 import { Cycle } from "../pages/Home/types/Cycles";
-import { cyclesReducer, CyclesState, IActionCycle } from "../reducers/cycles";
+import { cyclesReducer, IActionCycle } from "../reducers/cycles";
 import { differenceInSeconds } from "date-fns";
 
 const NM_LOCAL_STORAGE = "@ignite-timer-v1:cycles-state";
@@ -16,16 +16,6 @@ interface CyclesContextType {
 }
 
 export const CyclesContext = createContext({} as CyclesContextType);
-
-function init(initialState: CyclesState): CyclesState {
-  const storedStateAsJSON = localStorage.getItem(
-    "@ignite-timer:cycles-state-1.0.0"
-  );
-  if (storedStateAsJSON) {
-    return JSON.parse(storedStateAsJSON);
-  }
-  return initialState;
-}
 
 export function CyclesContextProvider({
   children,
