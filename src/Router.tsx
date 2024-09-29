@@ -1,7 +1,7 @@
-import { Route, Routes } from 'react-router-dom'
-import { History } from './pages/History'
-import { DefaultLayout } from './layouts/DefaultLayout/index'
-import { Home } from './pages/Home'
+import { Route, Routes } from "react-router-dom";
+import { History } from "./pages/History";
+import { DefaultLayout } from "./layouts/DefaultLayout/index";
+import { Home } from "./pages/Home";
 
 export function Router() {
   return (
@@ -21,5 +21,5 @@ export function Router() {
         // http://localhost:3000/admin/products
       }
     </Routes>
-  )
+  );
 }
